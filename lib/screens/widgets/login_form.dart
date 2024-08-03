@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import '../../features/authentication/screens/signup/signup.dart';
 import '../../screens/widgets/login/login.dart';
 import '../../services/authentication_services.dart';
 import '../../utils/constants/sizes.dart';
@@ -56,10 +57,11 @@ class TLoginForm extends StatelessWidget {
               width: double.infinity,
 
             ),
-            inLoginProcess ? Center(child: CircularProgressIndicator(),) : OutlinedButton(onPressed: onPressed, child: const Text(TTexts.signIn)),
+            inLoginProcess ? Center(child: CircularProgressIndicator(),) : SizedBox(width: double.infinity, child: OutlinedButton(onPressed: onPressed, child: const Text(TTexts.signIn))),
             const SizedBox(height: TSizes.spaceBtwItems),
             /// Create Account Button
-            /// SizedBox(width: double.infinity, child: OutlinedButton(onPressed: (){}, child: const Text(TTexts.signIn)),),
+            SizedBox(width: double.infinity, child: OutlinedButton(onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => SignupScreen()),);}, child: const Text(TTexts.createAccount)),),
+
             //const SizedBox(height: TSizes.spaceBtwItems),
           ],
         ),

@@ -11,8 +11,9 @@ class Profile extends StatelessWidget {
     final _user = Provider.of<User?>(context);
     return Scaffold(
       body: SafeArea(
-          child: CustomScrollView(slivers: [
-        ProfileAppbar(user: _user)
+          child: CustomScrollView(
+            slivers: [
+            ProfileAppbar(user: _user),
       ],)),
     );
   }

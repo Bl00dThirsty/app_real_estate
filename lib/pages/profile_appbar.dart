@@ -1,10 +1,11 @@
 import 'package:app_real_estate/services/authentication_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ProfileAppbar extends StatelessWidget {
   final User? user;
-  const ProfileAppbar({this.user});
+  ProfileAppbar({this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,16 @@ class ProfileAppbar extends StatelessWidget {
         titlePadding: EdgeInsets.only(left: 46.0, bottom: 8.0),
       ),
       actions: [
-        IconButton(onPressed: () => signOut(context),
-          icon: Icon(Icons.logout, color: Colors.white,),)
+        Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.only(right: 8.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.blue[600],
+          ),
+          child: IconButton(onPressed: () => signOut(context),
+            icon: Icon(Iconsax.logout, color: Colors.white, size: 33,),),
+        )
       ],
     );
   }
