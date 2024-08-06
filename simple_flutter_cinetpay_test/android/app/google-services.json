@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "719827327864",
+    "project_id": "guide237-94034",
+    "storage_bucket": "guide237-94034.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719827327864:android:f740a2b1193eaa6ad7468d",
+        "android_client_info": {
+          "package_name": "com.example.guide237"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZu9xt0OLK_dYWiA9nkOsNAYxbE3nV4Ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719827327864:android:fcc08718853c0f2ed7468d",
+        "android_client_info": {
+          "package_name": "com.example.simple_flutter_cinetpay_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZu9xt0OLK_dYWiA9nkOsNAYxbE3nV4Ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
