@@ -1,3 +1,4 @@
+import 'package:app_real_estate/utils/helpers/loaders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -19,9 +20,15 @@ class SignupController extends GetxController {
   Future<void> signup() async {
     try{
       // Start Loading
+      /// TFullScreenLoader.openLoadingDialog("Nous chargons vos informations...", TImages.doceranimation);
 
-      // Form validation
+      /// check internet connectivity
       final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) return;
+
+      /// Form validation
+      if (!signupFormKey.currentState!.validate()) return;
+
       // Privacy Policy Check
 
       // Register User in the firebase Authentication & Save user data in the Firebase
@@ -33,8 +40,11 @@ class SignupController extends GetxController {
       // Move to verify
     } catch(e) {
       // Show some generic error to the user
+      TLoaders.warningSnackBar(title: 'oh snap', message: e.toString());
     } finally {
       // Remove loader
+      //TFullScreenLoader
+      TLoaders.successSnackBar(title: "title");
     }
   }
 }

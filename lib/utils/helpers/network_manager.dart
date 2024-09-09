@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 
 class NetworkManager extends GetxController {
-  static NetworkManager get instance =>Get.find();
+  static NetworkManager get instance => Get.find();
 
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
@@ -18,13 +18,12 @@ class NetworkManager extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus as void Function(List<ConnectivityResult>)?) as StreamSubscription<ConnectivityResult>;
+    //_connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
   ///   Update the connection status based on changes in connectivity and show a revelant popup for no internet
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     _connectionStatus.value = result;
     if (_connectionStatus.value == ConnectivityResult.none) {
-      /// TODO: Create a loader if it's necessary
       TLoaders.warningSnackBar(title: 'pas de connexion internet');
     }
   }

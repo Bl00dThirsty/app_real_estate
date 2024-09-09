@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/villa_model.dart';
 import '../theme/color.dart';
 import '../utils/data.dart';
 import '../widgets/category_item.dart';
@@ -26,21 +27,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final String? userID;
   @override
   Widget build(BuildContext context) {
+
     final _user = Provider.of<User?>(context);
     return Scaffold(
       body: SafeArea(child: CustomScrollView(
         slivers: [
           HomeAppBar(user: _user),
           SliverToBoxAdapter(child: _buildBody(),),
-
         ],
       )
       ),
     );
   }
   _buildBody() {
+    final String? userID;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +77,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 20,
           ),
-          _buildPopulars(),
+          _buildPopulars(context),
           const SizedBox(
             height: 20,
           ),
@@ -84,11 +87,11 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Recommended",
+                  "Recommendé",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  "See all",
+                  "Tout voir",
                   style: TextStyle(fontSize: 14, color: AppColor.darker),
                 ),
               ],
@@ -107,7 +110,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Recent",
+                  "Récent",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 Text(
@@ -171,22 +174,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildPopulars() {
-    return CarouselSlider(
+  Widget _buildPopulars(BuildContext context) {
+
+    final _apparts = Provider.of<List<Appart>>(context);
+    if (_apparts.isEmpty) {
+      return Center(child: Text('No properties available'));
+    }
+    return CarouselSlider.builder(
+      itemCount: _apparts.length,
+      itemBuilder: (context, index, realIndex) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: PropertyItem(appart: _apparts[index]),
+        );
+      },
       options: CarouselOptions(
-        height: 240,
+        height: MediaQuery.of(context).size.height * 0.35,
         enlargeCenterPage: true,
-        disableCenter: true,
-        viewportFraction: .8,
-      ),
-      items: List.generate(
-        populars.length,
-            (index) => PropertyItem(
-          data: populars[index],
-        ),
+        autoPlay: true,
+        aspectRatio: 16/9,
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enableInfiniteScroll: true,
+        autoPlayAnimationDuration: Duration(milliseconds: 1000),
+        viewportFraction: 0.8,
       ),
     );
   }
+
 
   Widget _buildRecommended() {
     List<Widget> lists = List.generate(

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SearchPage extends StatefulWidget {
@@ -34,6 +34,7 @@ class _SearchPageState extends State<SearchPage> {
       if (_searchController.text != "") {
         for (var clientSnapShot in _allResults) {
           var name = clientSnapShot['appartName'].toString().toLowerCase();
+          var location = clientSnapShot['appartLocation'].toString().toLowerCase();
           if (name.contains(_searchController.text.toLowerCase())) {
             showResults.add(clientSnapShot);
           }
@@ -62,7 +63,7 @@ class _SearchPageState extends State<SearchPage> {
   _searchController.dispose();
     super.dispose();
   }
-  @override
+
   void didChangedDependencies() {
     getClientStream();
     super .didChangeDependencies();
@@ -83,6 +84,7 @@ class _SearchPageState extends State<SearchPage> {
               return ListTile(
                 title: Text(_resultList[index]['appartName'],),
                 subtitle: Text(_resultList[index]['appartUserName'],),
+
               );
             }),
 

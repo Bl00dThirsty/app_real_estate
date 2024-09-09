@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../services/authentication_services.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
+class TSocialButtons extends StatefulWidget {
+  const TSocialButtons({super.key});
 
-class TSocialButtons extends StatelessWidget {
-  const TSocialButtons({
-    super.key,
-  });
+  @override
+  State<TSocialButtons> createState() => _TSocialButtonsState();
+}
 
+class _TSocialButtonsState extends State<TSocialButtons> {
+  bool inLoginProcess = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -17,7 +21,7 @@ class TSocialButtons extends StatelessWidget {
         Container(
           decoration: BoxDecoration(border: Border.all(color: TColors.grey), borderRadius: BorderRadius.circular(100)),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () => signIn(),
             icon: const Image(
               width: TSizes.iconMd,
               height: TSizes.iconMd,
@@ -40,4 +44,11 @@ class TSocialButtons extends StatelessWidget {
       ],
     );
   }
+  signIn() {
+    setState(() {
+      inLoginProcess = true;
+      AuthService().signInWithGoogle();
+    });
+  }
 }
+

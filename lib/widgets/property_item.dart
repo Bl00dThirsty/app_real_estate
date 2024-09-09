@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../theme/color.dart';
 import 'custom_image.dart';
 import 'icon_box.dart';
+import 'package:flutter/material.dart';
+import '../models/villa_model.dart';
 
 class PropertyItem extends StatelessWidget {
-  const PropertyItem({Key? key, required this.data}) : super(key: key);
+  final Appart appart;
+  final String? userID;
 
-  final data;
+  const PropertyItem({super.key, required this.appart, this.userID});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,7 @@ class PropertyItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(
-            color: AppColor.shadowColor.withOpacity(0.1),
+            color: Colors.grey.withOpacity(0.1),
             spreadRadius: .5,
             blurRadius: 1,
             offset: Offset(0, 1), // changes position of shadow
@@ -29,11 +33,11 @@ class PropertyItem extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          CustomImage(
-            data["image"],
+          Image.network(
+            appart.appartUrlImg!,
             width: double.infinity,
             height: 150,
-            radius: 25,
+            fit: BoxFit.cover,
           ),
           Positioned(
             right: 20,
@@ -51,13 +55,10 @@ class PropertyItem extends StatelessWidget {
   }
 
   Widget _buildFavorite() {
-    return IconBox(
-      bgColor: AppColor.red,
-      child: Icon(
-        data["is_favorited"] ? Icons.favorite : Icons.favorite_border,
-        color: Colors.white,
-        size: 20,
-      ),
+    return Icon(
+      Iconsax.heart,
+      color: Colors.red,
+      size: 20,
     );
   }
 
@@ -66,40 +67,48 @@ class PropertyItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          data["name"],
+          appart.appartName!,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
-        const SizedBox(
-          height: 5,
+        SizedBox(height: 4),
+        Text(
+          'Publié par: ${appart.appartUserName}',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
+          ),
         ),
+        SizedBox(height: 10),
         Row(
           children: [
-            Icon(
-              Icons.place_outlined,
-              color: AppColor.darker,
-              size: 13,
-            ),
-            const SizedBox(
-              width: 3,
-            ),
+            Text('Prix: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300)),
             Text(
-              data["location"],
-              style: TextStyle(fontSize: 13, color: AppColor.darker),
+              '${appart.appartPrice} FCFA',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.blue,
+              ),
             ),
           ],
         ),
-        const SizedBox(
-          height: 5,
-        ),
-        Text(
-          data["price"],
-          style: TextStyle(
-            fontSize: 15,
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
-          ),
+        SizedBox(height: 10),
+        Row(
+          children: [
+            Text('Localisation: ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300)),
+            Text(
+              '${appart.appartLocation}',
+              style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              ),
+            ),
+          ],
         ),
       ],
     );

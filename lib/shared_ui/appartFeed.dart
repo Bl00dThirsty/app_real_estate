@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
@@ -11,7 +9,7 @@ class AppartFeed extends StatelessWidget {
   final Appart? appart;
   final String? userID;
 
-  const AppartFeed({this.appart, this.userID});
+  const AppartFeed({super.key, this.appart, this.userID});
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +41,14 @@ class AppartFeed extends StatelessWidget {
                 children: [
                   Text(
                     appart!.appartName!,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
-                  SizedBox(width: 28.0),
+                  const SizedBox(width: 28.0),
                   Text('Publié par: '),
 
-                  SizedBox(width: 20.0),
+                  const SizedBox(width: 20.0),
 
-                  Text('${appart!.appartUserName}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.blue)),
+                  Text('${appart!.appartUserName}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.blue)),
                 ],
               ),
               Text(formattingDate(appart!.appartTimestamp)),

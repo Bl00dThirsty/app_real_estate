@@ -1,41 +1,16 @@
 
+import 'package:app_real_estate/widgets/property_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+
+import '../models/villa_model.dart';
 
 //var profile = NetworkImage(user!.photoURL);
 
-// <PropertyModel>
-List populars = [
-  {
-    "image": "https://th.bing.com/th/id/OIP.27YDCX8U4yXiuRGkrLBUrwHaFj?w=212&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-    "name": "Villa",
-    "price": "XFA 280k",
-    "location": "Nkolndongo (Yaoundé), Cameroun",
-    "is_favorited": true,
-  },
-  {
-    "image": "https://th.bing.com/th/id/OIP.r7pn4Lwt3QFHfwx1tkugqgHaJ4?w=202&h=269&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-    "name": "Studio moderne",
-    "price": "XFA 150k",
-    "location": "Anguissa (Yaoundé), Cameroon",
-    "is_favorited": false,
-  },
-  {
-    "image": "https://th.bing.com/th/id/OIP.7F6PRCAVEQY0pLpzQD7vKAHaFi?w=202&h=152&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-    "name": "Appartement moderne",
-    "price": "XFA 175k",
-    "location": "Elig-Edzoa (Yaoundé), Cameroon",
-    "is_favorited": false,
-  },
-  {
-    "image": "https://th.bing.com/th/id/OIP.27YDCX8U4yXiuRGkrLBUrwHaFj?w=212&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-    "name": "Villa",
-    "price": "XFA 1,2M",
-    "location": "Odza (Yaoundé), Cameroon",
-    "is_favorited": false,
-  },
-];
+// <AppartModel>
 
 List recommended = [
   {
@@ -70,14 +45,14 @@ List recents = [
     "is_favorited": false,
   },
   {
-    "image": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "image": "",
     "name": "Studio moderne",
     "price": "XFA 150k",
     "location": "Biyem-Assi",
     "is_favorited": false,
   },
   {
-    "image": "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "image": "",
     "name": "Appartement moderne",
     "price": "XFA 180k",
     "location": "Etam Bafia",
@@ -88,23 +63,23 @@ List recents = [
 List categories = [
   {
     "name" : "Tout",
-    "icon" :  FontAwesomeIcons.boxes
-  },
-  {
-    "name" : "Villa",
-    "icon" :  FontAwesomeIcons.university
-  },
-  {
-    "name" : "Boutique",
-    "icon" :  FontAwesomeIcons.storeAlt
-  },
-  {
-    "name" : "Appartement",
-    "icon" :  FontAwesomeIcons.building
+    "icon" :  Iconsax.buildings_2
   },
   {
     "name" : "Maison",
-    "icon" :  FontAwesomeIcons.home
+    "icon" :  Iconsax.home_15
+  },
+  {
+    "name" : "Boutique",
+    "icon" :  Iconsax.shop
+  },
+  {
+    "name" : "Appartement",
+    "icon" :  Iconsax.building
+  },
+  {
+    "name" : "Villa",
+    "icon" :  Iconsax.building_3
   },
 ];
 

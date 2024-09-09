@@ -1,8 +1,10 @@
 import 'package:app_real_estate/pages/explore.dart';
+import 'package:app_real_estate/pages/profile.dart';
 import 'package:app_real_estate/pages/pub_page.dart';
 import 'package:app_real_estate/theme/color.dart';
 import 'package:app_real_estate/widgets/bottombar_item.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 
 import 'home.dart';
@@ -19,28 +21,23 @@ class _RootAppState extends State<RootApp> {
   final List _barItems = [
     {
       "icon": Icons.home_outlined,
-      "active_icon": Icons.home_rounded,
+      "active_icon": Iconsax.home,
       "page": HomePage(),
     },
     {
       "icon": Icons.search_outlined,
-      "active_icon": Icons.search,
+      "active_icon": Iconsax.search_favorite,
       "page": ExplorePage(),
     },
     {
       "icon": Icons.favorite_border,
-      "active_icon": Icons.favorite_outlined,
-      "page": HomePage(),
-    },
-    {
-      "icon": Icons.forum_outlined,
-      "active_icon": Icons.forum_rounded,
+      "active_icon": Iconsax.add_circle,
       "page": PubPage(),
     },
     {
-      "icon": Icons.settings_outlined,
-      "active_icon": Icons.settings_rounded,
-      "page": HomePage(),
+      "icon": Icons.forum_outlined,
+      "active_icon": Iconsax.profile,
+      "page": Profile(),
     },
   ];
 
