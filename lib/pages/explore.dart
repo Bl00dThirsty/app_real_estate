@@ -1,11 +1,13 @@
-import 'package:app_real_estate/theme/color.dart';
-import 'package:app_real_estate/utils/data.dart';
-import 'package:app_real_estate/widgets/broker_item.dart';
-import 'package:app_real_estate/widgets/company_item.dart';
-import 'package:app_real_estate/widgets/custom_textbox.dart';
-import 'package:app_real_estate/widgets/icon_box.dart';
-import 'package:app_real_estate/widgets/recommend_item.dart';
+
 import 'package:flutter/material.dart';
+
+import '../theme/color.dart';
+import '../utils/data.dart';
+import '../widgets/broker_item.dart';
+import '../widgets/company_item.dart';
+import '../widgets/custom_textbox.dart';
+import '../widgets/icon_box.dart';
+import '../widgets/recommend_item.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);

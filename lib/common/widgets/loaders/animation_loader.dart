@@ -1,8 +1,8 @@
-import 'package:app_real_estate/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/sizes.dart';
 
 
 class TAnimationLoaderWidget extends StatelessWidget {

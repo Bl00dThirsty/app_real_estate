@@ -1,12 +1,12 @@
 flutter_native_splash:
-  color: "#FFFFFF"
-  color_dark: "#272727"
-  image: assets/logos/real-estate-logo.png
-  image_dark: assets/logos/real-estate-logo.png
+  color: "#0000FF"
+  color_dark: "#0000FF"
+  image: assets/logos/resmartha-logo.png
+  image_dark: assets/logos/resmartha-logo.png
 
   android_12:
-    color: "#FFFFFF"
-    color_dark: "#272727"
-    image: assets/logos/real-estate-logo.png
-    image_dark: assets/logos/real-estate-logo.png
+    color: "#0000FF"
+    color_dark: "#0000FF"
+    image: assets/logos/resmartha-logo.png
+    image_dark: assets/logos/resmartha-logo.png
   web: false

@@ -12,7 +12,6 @@ class TTexts {
   static const String onBoardingSubTitle3 = "From our Doorstep to yours";
   // -- Login Title
 
-
   // -- Authentication Form Text
   static const String email = "E-mail";
   static const String firstName = "First Name";
@@ -26,7 +25,7 @@ class TTexts {
   static const String signIn = "Se connecter";
 
   // -- Authentication Headings Text
-  static const String loginTitle = "Bienvenu,";
+  static const String loginTitle = "Bienvenue";
   static const String loginSubTitle = "Découvrez des choix illimités et des commodités inégalées";
   static const String signupTitle = "Créez votre compte! ";
   static const String forgetPasswordTitle = "Forget pasword";

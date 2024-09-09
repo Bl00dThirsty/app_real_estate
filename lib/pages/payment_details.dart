@@ -1,4 +1,3 @@
-import 'package:app_real_estate/pages/home_appbar.dart';
 import 'package:awesome_card/awesome_card.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +20,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       cvv = "456";
   @override
   Widget build(BuildContext context) {
+    var paymentDetailList;
     return Scaffold(
       appBar: const DefaultAppBar(
         title: "Details de paiement",
@@ -164,21 +164,24 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   Container(
                     height: 48.0,
                     width: MediaQuery.of(context).size.width,
-                    child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.black.withOpacity(0.2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0),
+                          ),
                         ),
                       ),
-                      color: Colors.black.withOpacity(0.2),
                       child: Text(
                         "Edit Detail",
                         style: TextStyle(fontSize: 16.0),
                       ),
                       onPressed: () => print("Edit Detail"),
                     ),
-                  ),
+                  )
+
                 ],
               ),
             ),

@@ -1,6 +1,6 @@
-import 'package:app_real_estate/pages/home.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/home.dart';
 import '../pages/profile.dart';
 import '../pages/pub_page.dart';
 import '../pages/search_page.dart';

@@ -1,13 +1,14 @@
-import 'package:app_real_estate/pages/explore.dart';
-import 'package:app_real_estate/pages/profile.dart';
-import 'package:app_real_estate/pages/pub_page.dart';
-import 'package:app_real_estate/theme/color.dart';
-import 'package:app_real_estate/widgets/bottombar_item.dart';
+
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 
+import '../theme/color.dart';
+import '../widgets/bottombar_item.dart';
+import 'explore.dart';
 import 'home.dart';
+import 'profile.dart';
+import 'pub_page.dart';
 
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);

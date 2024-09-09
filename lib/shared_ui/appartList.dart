@@ -1,8 +1,8 @@
-import 'package:app_real_estate/shared_ui/appartFeed.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/villa_model.dart';
+import 'appartFeed.dart';
 
 class AppartList extends StatelessWidget {
   final String? userID;

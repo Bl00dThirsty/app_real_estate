@@ -1,23 +1,18 @@
-
-import 'package:app_real_estate/pages/pub_page.dart';
-import 'package:app_real_estate/pages/root.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
-
 import '../models/villa_model.dart';
 import '../theme/color.dart';
-import '../utils/data.dart';
-import '../widgets/category_item.dart';
-import '../widgets/custom_textbox.dart';
-import '../widgets/icon_box.dart';
+import '../utils/constants/colors.dart';
+import '../utils/helpers/helper_functions.dart';
 import '../widgets/property_item.dart';
-import '../widgets/recent_item.dart';
-import '../widgets/recommend_item.dart';
 import 'home_appbar.dart';
-
-
+import 'profile.dart';
+import 'search_page.dart';
+import 'pub_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,214 +22,154 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final String? userID;
+  int _selectedIndex = 0;
+
+  static const List<Widget> _pages = <Widget>[
+    HomePageContent(),
+    SearchPage(),
+    PubPage(),
+    Profile(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
+    final dark = THelperFunctions.isDarkMode(context);
     final _user = Provider.of<User?>(context);
     return Scaffold(
-      body: SafeArea(child: CustomScrollView(
-        slivers: [
-          HomeAppBar(user: _user),
-          SliverToBoxAdapter(child: _buildBody(),),
-        ],
-      )
-      ),
-    );
-  }
-  _buildBody() {
-    final String? userID;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          const SizedBox(
-            height: 15,
+          SafeArea(
+            child: _pages[_selectedIndex],
           ),
-          _buildSearch(),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildCategories(),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Populaire",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          Positioned(
+            bottom: 10,
+            left: 10,
+            right: 10,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: BottomNavigationBar(
+                  items: const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(Iconsax.home),
+                      label: 'Accueil',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Iconsax.search_normal),
+                      label: 'Recherche',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Iconsax.add_circle),
+                      label: 'Publier',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Iconsax.profile_circle),
+                      label: 'Profile',
+                    ),
+                  ],
+                  currentIndex: _selectedIndex,
+                  selectedItemColor: dark ? Colors.black : Colors.blue,
+                  onTap: _onItemTapped,
+                  backgroundColor: dark ? Colors.blue :  Colors.white,
+                  type: BottomNavigationBarType.fixed,
                 ),
-                TextButton(
-                  onPressed: () => Navigator.pushNamed(context, '/pub'), child: Text('Tout voir'),
-                ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildPopulars(context),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Recommendé",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "Tout voir",
-                  style: TextStyle(fontSize: 14, color: AppColor.darker),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildRecommended(),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Récent",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "voir",
-                  style: TextStyle(fontSize: 14, color: AppColor.darker),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildRecent(),
-          const SizedBox(
-            height: 100,
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildSearch() {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/search'),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 10,
-            ),
-            IconBox(
-              child: Icon(Icons.search_outlined, color: Colors.white),
-              bgColor: AppColor.secondary,
-              radius: 10,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  int _selectedCategory = 0;
-  Widget _buildCategories() {
-    List<Widget> lists = List.generate(
-      categories.length,
-          (index) => CategoryItem(
-        data: categories[index],
-        selected: index == _selectedCategory,
-        onTap: () {
-          setState(() {
-            _selectedCategory = index;
-          });
-        },
-      ),
-    );
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(bottom: 5, left: 15),
-      child: Row(children: lists),
-    );
-  }
-
-  Widget _buildPopulars(BuildContext context) {
-
-    final _apparts = Provider.of<List<Appart>>(context);
-    if (_apparts.isEmpty) {
-      return Center(child: Text('No properties available'));
-    }
-    return CarouselSlider.builder(
-      itemCount: _apparts.length,
-      itemBuilder: (context, index, realIndex) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
-          child: PropertyItem(appart: _apparts[index]),
-        );
-      },
-      options: CarouselOptions(
-        height: MediaQuery.of(context).size.height * 0.35,
-        enlargeCenterPage: true,
-        autoPlay: true,
-        aspectRatio: 16/9,
-        autoPlayCurve: Curves.fastOutSlowIn,
-        enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 1000),
-        viewportFraction: 0.8,
-      ),
-    );
-  }
-
-
-  Widget _buildRecommended() {
-    List<Widget> lists = List.generate(
-      recommended.length,
-          (index) => RecommendItem(
-        data: recommended[index],
-      ),
-    );
-
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(bottom: 5, left: 15),
-      child: Row(children: lists),
-    );
-  }
-
-  Widget _buildRecent() {
-    List<Widget> lists = List.generate(
-      recents.length,
-          (index) => RecentItem(
-        data: recents[index],
-      ),
-    );
-
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(bottom: 5, left: 15),
-      child: Row(children: lists),
     );
   }
 }
 
+class HomePageContent extends StatelessWidget {
+  const HomePageContent({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        HomeAppBar(user: Provider.of<User?>(context)),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Logements",
+                  style: GoogleFonts.nunito(
+                    textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
 
+                  )
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/pub'),
+                  child: Text('Publier?', style: GoogleFonts.nunito(
+                    textStyle: TextStyle(color: Colors.blue),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.italic,
+                  ),),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SliverPadding(padding: EdgeInsets.only(top: 20)),
+        _buildPopulars(context),
+      ],
+    );
+  }
 
+  Widget _buildPopulars(BuildContext context) {
+    final _apparts = Provider.of<List<Appart>>(context);
 
+    if (_apparts.isEmpty) {
+      return SliverToBoxAdapter(
+        child: Center(child: Text('Aucun logement disponible')),
+      );
+    }
 
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+            (context, index) {
+          final appart = _apparts[index];
+          return GestureDetector(
+            onTap: () => Navigator.pushNamed(
+              context,
+              '/detail',
+              arguments: appart.toMap(),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: PropertyItem(appart: appart),
+              ),
+            ),
+          );
+        },
+        childCount: _apparts.length,
+      ),
+    );
+  }
+}

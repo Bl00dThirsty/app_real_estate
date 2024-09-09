@@ -1,5 +1,4 @@
 
-import 'package:app_real_estate/widgets/property_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';

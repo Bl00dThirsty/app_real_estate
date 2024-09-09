@@ -14,6 +14,8 @@ class PubPage extends StatelessWidget {
     final _user = Provider.of<User?>(context);
     return Scaffold(
       body: SafeArea(child: CustomScrollView(
+
+        /// - Uploader plusieurs images d'un même logement
         slivers: [
           HomeAppBar(user: _user),
           AddAppartSection(user: _user),

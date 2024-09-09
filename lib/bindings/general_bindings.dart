@@ -1,5 +1,6 @@
-import 'package:app_real_estate/utils/helpers/network_manager.dart';
 import 'package:get/get.dart';
+
+import '../utils/helpers/network_manager.dart';
 
 class GeneralBindings extends Bindings {
   @override

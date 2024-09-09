@@ -1,5 +1,5 @@
-import 'package:app_real_estate/theme/color.dart';
 import 'package:flutter/material.dart';
+import '../theme/color.dart';
 import 'custom_image.dart';
 
 class BrokerItem extends StatelessWidget {

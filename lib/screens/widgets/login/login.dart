@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../common/styles/spacing_styles.dart';
 import '../../../common/widgets/login_signup/social_button.dart';
+import '../../../features/authentication/screens/signup/signup.dart';
 import '../../../services/authentication_services.dart';
 import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
               /// Form
-              TLoginForm(inLoginProcess: inLoginProcess,onPressed: () => signIn()),
+              TLoginForm(inLoginProcess: inLoginProcess, onPressed: () => Get.to(() => SignupScreen()),),
 
               TFormDivider(dividerText: TTexts.orSignInWith.capitalize!),
 
@@ -52,12 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-  signIn() {
-    setState(() {
-      inLoginProcess = true;
-      AuthService().signInWithGoogle();
-    });
   }
 }
 

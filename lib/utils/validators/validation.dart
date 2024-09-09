@@ -46,7 +46,7 @@ class TValidator {
       return 'Phone number is required';
     }
 
-    final phoneRegExp = RegExp(r'^\d{10}$');
+    final phoneRegExp = RegExp(r'^\d{9}$');
 
     if (!phoneRegExp.hasMatch(value)) {
       return 'invalid phone number format (10 digits required).';

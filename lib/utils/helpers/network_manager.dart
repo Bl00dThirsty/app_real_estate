@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:app_real_estate/utils/helpers/loaders.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import 'loaders.dart';
 
 
 class NetworkManager extends GetxController {
